@@ -5,95 +5,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PaperBet :: Spinwheel</title>
+  <link rel="stylesheet" href="./styles.css">
   <style>
-    :root {
-      --startDeg: 0deg;
-      --endDeg: 1600deg;
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+    body {
+      background:#232c31;
+      display:-webkit-box;
+      display:-ms-flexbox;
+      display:flex;
+      -webkit-box-pack:center;
+          -ms-flex-pack:center;
+              justify-content:center;
+      -webkit-box-align:center;
+          -ms-flex-align:center;
+              align-items:center;
+      height:100vh;
     }
     * {
-      --width: calc(clamp(180px, 100%, 800px) - 2rem);
-      margin: 0;
-      padding: 0;
+      margin:0;
+      padding:0;
       font-size:40pt;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    .smooth {
-      transition: all 7s cubic-bezier(0,1,.74,1);
-    }
-    #rotate {
-      overflow: hidden;
-      transform: rotate(0);
-    }
-    @keyframes rotation {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(1600deg);
-      }
+      font-family: 'Open Sans', sans-serif;
     }
     .contain {
       overflow:hidden;
-      width: var(--width);
-      position: absolute;
+      width:calc(clamp(180px, 100%, 800px) - 2rem);
+      position:absolute;
     }
-    body {
-      background: #232c31;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
   </style>
-  <script>
-
-
-function getRandomInt(max, isInt) {
-  let rand = Math.random() * max;
-  return isInt ? Math.floor(rand) : rand;
-}
-
-  const variation = 13.0;
-    let total = 0;
-    let vary = 0;
-    let wheel
-    function repeate() {
-      let symbol = getRandomInt(25, true);
-      let resAng = 1440 + total + (symbol * 14.4);
-
-      let index = Math.round((resAng%360)/14.4);
-      let display = document.getElementById("displayer");
-      let sym = getSymbol(index);
-      display.innerText = sym[1];
-      display.style.color = ""+sym[0];
-      
-      total = resAng;
-      vary = total - (variation/2) + getRandomInt(variation, false);
-      //total = (resAng - (variation/2)) + getRandomInt(variation, false);
-      wheel.classList.add("smooth");
-      wheel.style.transform = "rotate(" + vary + "deg)";
-      setTimeout(rebase, 8000);
-    }
-
-    function rebase() {
-      if (wheel == null) wheel = document.getElementById('rotate');
-      total = total % 360;
-      vary = vary % 360;
-      wheel.classList.remove("smooth");
-      wheel.style.transform = "rotate(" + vary + "deg)";
-      setTimeout(repeate, 2000);
-    }
-
-  
-    const codes = ['0','K','3','J','7','8','9','6','Q','4','A','2','5','3','K','5','J','7','8','9','6','Q','4','A','2']
-
-    function getSymbol(index) {
-      let colour = index == 0 ? "green" : index & 1 != 0 ? "black" : "red";
-      return [colour, codes[index]];
-    }
-
-  </script>
 </head>
 <body>
   <div class="contain">
@@ -110,7 +49,7 @@ function getRandomInt(max, isInt) {
     </svg>
   </div>
   <div class="contain">
-    <svg onload="rebase()" id="rotate"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1029.54839 1029.54839">
+    <svg id="rotate"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1029.54839 1029.54839">
       <g>
         <g>
           <path d="M910.04318,144.37027a395.2982,395.2982,0,0,0-96.87355,24.71636L777.08118,77.93341A493.3559,493.3559,0,0,1,897.74876,47.03553Z" transform="translate(-445.22581 -25.22581)"/>
@@ -177,7 +116,8 @@ function getRandomInt(max, isInt) {
     </svg>
   </div>
   <div class="contain">
-    <div style="z-index: 4; text-align: center;"><h1 id="displayer">HELLO</h1></div>    
+    <div style="z-index: 4; text-align: center;"><h1 id="displayer">?</h1></div>    
   </div>
+  <script src="./wheel.js"></script>
 </body>
 </html>
