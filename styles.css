@@ -1,0 +1,11 @@
+#rotate {
+  transition: all 7s cubic-bezier(0, 1, 0.74, 1);
+  overflow: hidden;
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+}
+
+.notransition {
+  transition: none !important;
+}
